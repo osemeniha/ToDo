@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="title">To-Do List</div>
+        <hr class="hr-line">
+        <div v-on:click="newTask=!newTask" class="new-task">Новая задача</div>
+        <div v-show="newTask" class="add-task">
+            <div class="characteristics-add">
+                <fieldset class="disc-task">
+                    <legend>Название задачи*</legend>
+                    <input type="text" placeholder="Купить хлеб" v-model="newTaskData.title">
+                </fieldset>
+                <fieldset class="disc-task">
+                    <legend>Описание задачи</legend>
+                    <textarea type="text" placeholder="Белый и бородинский" v-model="newTaskData.disc"></textarea>
+                </fieldset>
+                <div class="date">
+                    <input id="date" type="date" :disabled="withoutDate" v-model="newTaskData.date" min="Date.now()">
+                    <label>Без даты <input type="checkbox" v-model="withoutDate"></label>             
+                </div>            
+            </div>
+        <button v-on:click="add_task()">Добавить</button>
+        </div>
+        <div class="tasks">
+            <p>Текущие задачи: {{ tasks.length }}</p>
+            <task v-on:delete_task="delete_task(index)" v-for="(data, index) in tasks" :key="index" :data="data"></task>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
