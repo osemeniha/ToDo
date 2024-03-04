@@ -35,12 +35,14 @@ var vue = new Vue ({
             disc: '',
             date: ''
         },
-        tasks: [],
-        minDate: new Date().toISOString().split("T")[0]
+        tasks: []
     },
     methods: {
         add_task() {
             if(this.newTaskData.title != '' && (isNaN(this.newTaskData.date) || this.withoutDate)){
+                if (this.withoutDate){
+                    this.newTaskData.date = '';
+                }
                 this.tasks.push({
                     title: this.newTaskData.title,
                     disc: this.newTaskData.disc,
@@ -56,3 +58,4 @@ var vue = new Vue ({
         }
     }
 });
+document.getElementById("date").min = new Date().toISOString().split("T")[0];
