@@ -37,6 +37,14 @@ var vue = new Vue ({
         },
         tasks: []
     },
+    mounted() {
+        this.tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    },
+    watch: {
+        tasks() {
+            localStorage.setItem("tasks", JSON.stringify(this.tasks));
+        }
+    },
     methods: {
         add_task() {
             if(this.newTaskData.title != '' && (isNaN(this.newTaskData.date) || this.withoutDate)){
